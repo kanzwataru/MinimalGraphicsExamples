@@ -7,39 +7,39 @@
 #pragma comment (lib, "extern/glfw3_mt.lib")
 
 const char *vertex_shader_src = 
-	"#version 450 core																	\n"
-	"																					\n"
-	"layout (location = 0) in vec3 in_position;											\n"
-	"layout (location = 1) in uvec4 in_joint_indices;									\n"
-	"layout (location = 2) in vec4 in_joint_weights;									\n"
-	"																					\n"
-	"layout (location = 0) uniform mat4 mvp_matrix;										\n"
-	"																					\n"
-	"layout(std430, binding = 0) readonly buffer SkinBuffer {							\n" // Buffer for the skin matrices
-	"	mat4 bone_matrices[];															\n"
-	"};																					\n"
-	"																					\n"
-	"void main()																		\n"
-	"{																					\n"
-	"	vec4 pos = vec4(in_position, 1.0);												\n"
-	"	vec4 skinned_pos = vec4(0, 0, 0, 0);											\n"
-	"																					\n"
+	"#version 450 core									\n"
+	"											\n"
+	"layout (location = 0) in vec3 in_position;						\n"
+	"layout (location = 1) in uvec4 in_joint_indices;					\n"
+	"layout (location = 2) in vec4 in_joint_weights;					\n"
+	"											\n"
+	"layout (location = 0) uniform mat4 mvp_matrix;						\n"
+	"											\n"
+	"layout(std430, binding = 0) readonly buffer SkinBuffer {				\n" // Buffer for the skin matrices
+	"	mat4 bone_matrices[];								\n"
+	"};											\n"
+	"											\n"
+	"void main()										\n"
+	"{											\n"
+	"	vec4 pos = vec4(in_position, 1.0);						\n"
+	"	vec4 skinned_pos = vec4(0, 0, 0, 0);						\n"
+	"											\n"
 	"	skinned_pos += in_joint_weights.x * (bone_matrices[in_joint_indices.x] * pos);	\n" // Calculate all the skinned positions
 	"	skinned_pos += in_joint_weights.y * (bone_matrices[in_joint_indices.y] * pos);	\n" // and add them all together
 	"	skinned_pos += in_joint_weights.z * (bone_matrices[in_joint_indices.z] * pos);	\n" // weighted by the joint weight.
 	"	skinned_pos += in_joint_weights.w * (bone_matrices[in_joint_indices.w] * pos);	\n"
-	"																					\n"
-	"	gl_Position = mvp_matrix * skinned_pos;											\n" // Finally, transform into projected space
+	"											\n"
+	"	gl_Position = mvp_matrix * skinned_pos;						\n" // Finally, transform into projected space
 	"}																					\n";
 
 const char *fragment_shader_src = 
-	"#version 450 core																	\n"
-	"layout (location = 0) out vec4 out_color;											\n"
-	"																					\n"
-	"void main()																		\n"
-	"{																					\n"
-	"	out_color = vec4(0.75, 0.5, 0.25, 1.0);											\n"
-	"}																					\n";
+	"#version 450 core									\n"
+	"layout (location = 0) out vec4 out_color;						\n"
+	"											\n"
+	"void main()										\n"
+	"{											\n"
+	"	out_color = vec4(0.75, 0.5, 0.25, 1.0);						\n"
+	"}											\n";
 
 int main(int argc, char **argv)
 {
