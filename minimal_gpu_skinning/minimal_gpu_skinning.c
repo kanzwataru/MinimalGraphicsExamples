@@ -145,7 +145,7 @@ int main(int argc, char **argv)
 		}
 	};
 
-	int parent_indices[BONE_COUNT] = { // The index for each joint's parent if any. NOTE: All of the code assumes that all joints are stored after their parents in the list, and not before.
+	int parent_indices[BONE_COUNT] = { // The index for each joint's parent if any. 
 		-1, // First joint is not parented to anything
 		0   // Second joint is parented to the first joint
 	};
@@ -177,7 +177,7 @@ int main(int argc, char **argv)
 
 		// 1. First "animate" the joints, computing their local transforms.
 		mat4x4 local_matrices[BONE_COUNT]; // For each joint, the local transform (equivalent to the values an artist would animate in an animation software).
-										   // Identity matrix here would means the joint is at its default position, relative to the parent.
+						   // Identity matrix here would means the joint is at its default position, relative to the parent.
 
 		{ // First bone, animate a slow rotation
 			quat rotation;
