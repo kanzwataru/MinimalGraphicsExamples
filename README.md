@@ -1,2 +1,2 @@
-# MinimalGraphicsExamples
-Very short self-contained graphics programming examples
+# Minimal Graphics Examples
+Very short self-contained graphics programming examples.
