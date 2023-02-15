@@ -135,13 +135,13 @@ int main(int argc, char **argv)
             1, 0, 0, 0,
             0, 1, 0, 0,
             0, 0, 1, 0,
-            0, 0, 0, 1,
+            0.5f, 0, 0, 1,
         },
         { // Second joint
             1, 0, 0, 0,
             0, 1, 0, 0,
             0, 0, 1, 0,
-            0, 0.75, 0, 1,
+            0.5f, 0.75, 0, 1,
         }
     };
 
@@ -218,8 +218,8 @@ int main(int argc, char **argv)
                 mat4x4_mul(world_matrices[i], parent_offset_mat, local_matrices[i]);
             }
             else {
-                // * Joint with no parent, the local matrix is the same as the world matrix
-                mat4x4_dup(world_matrices[i], local_matrices[i]);
+                // * Joint with no parent, simply apply the local transform directly to the bind pose transform
+                mat4x4_mul(world_matrices[i], bind_pose[i], local_matrices[i]);
             }
         }
 
